@@ -142,5 +142,4 @@ changeDetection: ChangeDetectionStrategy.OnPush 变更检测
 
   对应在使用管道功能的 module需要 declarations和exports
 
-  
-
+- ng的http模块也有 new HttpParams({fromString:})
