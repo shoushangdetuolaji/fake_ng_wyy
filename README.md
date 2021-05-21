@@ -115,5 +115,32 @@ Choose tamplate to create projet: -- blank
     
     ```
 
-    
+- 生成一个pages/home module下的 组件模块
+  `ng g c pages/home/components/wy-carousel`
+
+
+
+
+
+changeDetection: ChangeDetectionStrategy.OnPush 变更检测
+
+
+
+
+
+- 在share module下建立一个 ui目录 模块 ----共用组件
+
+  `ng g m share/wy-ui`
+
+  当然需要在share.module.ts引入 WyUiModule 模块
+
+- 在wy-ui目录 创建一个专辑组件
+  `ng g c share/wy-ui/single-sheet`
+
+- 新建管道符模块
+  `ng g p share/play-count`
+
+  对应在使用管道功能的 module需要 declarations和exports
+
+  
 
