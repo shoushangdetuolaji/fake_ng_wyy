@@ -143,3 +143,137 @@ changeDetection: ChangeDetectionStrategy.OnPush 变更检测
   对应在使用管道功能的 module需要 declarations和exports
 
 - ng的http模块也有 new HttpParams({fromString:})
+
+- 生成一个首页模块的组件
+
+  `ng g c pages/home/components/member-card`
+
+
+
+
+
+### 路由与导航
+
+- resovle 预先获取组件数据
+
+  如果在使用真实api，很有可能数据返回有延迟，导致无法及时显示，在这种情况下如何处理呢？ 显示一个空的组件不是最好额用户体验。
+
+  > https://v8.angular.cn/guide/router#resolve-pre-fetching-component-data
+
+- 解决：
+
+  - 在对应目录下
+
+  - 比如home/components/home-resolve.service.ts
+
+  - 这样可以不用写请求函数接口了
+
+  - ```ts
+    // home-resolve.service.ts
+    import { Injectable } from "@angular/core";
+    import { Resolve } from "@angular/router";
+    import { forkJoin, Observable } from "rxjs";
+    import { first, take } from "rxjs/internal/operators";
+    import { Banner, HotTag, Singer, SongSheet } from "src/app/services/data-type/common.type";
+    import { HomeService } from "src/app/services/home.service";
+    import { SingerService } from "src/app/services/singer.service";
+     
+    
+    type HomeDataType = [Banner[], HotTag[], SongSheet[], Singer[]];
+    @Injectable()
+    
+    export class HomeResolverService implements Resolve<HomeDataType> {
+      constructor(
+        private homeServe: HomeService,
+        private singerServe: SingerService
+      ) {}
+     
+      resolve( ): Observable<HomeDataType> {
+        // 操作符
+        return forkJoin([
+          this.homeServe.getBanners(),
+          this.homeServe.getHotTags(),
+          this.homeServe.getPersonalSheetList(),
+          this.singerServe.getEnterSinger()
+        ]).pipe(first());  // 只取第一次流
+      }
+    }
+    ```
+
+  - home-routing.module.ts 需要引入该文件
+
+    ```TS
+    import { NgModule } from '@angular/core';
+    import { Routes, RouterModule } from '@angular/router';
+    import { HomeResolverService } from './components/home-resolve.service'; // here
+    import { HomeComponent } from './home.component';
+    
+    
+    const routes: Routes = [
+      { path: 'home', component: HomeComponent, data: { title: '发现'}, resolve: { homeDatas: HomeResolverService } } // HERE
+    ];
+    
+    @NgModule({
+      imports: [RouterModule.forChild(routes)],
+      exports: [RouterModule],
+      providers: [HomeResolverService]
+    })
+    export class HomeRoutingModule { }
+    
+    
+    ```
+
+  - home.component.ts
+
+    ```ts
+    import { Component, OnInit, ViewChild } from '@angular/core';
+    import { Banner, HotTag, Singer, SongSheet } from 'src/app/services/data-type/common.type';
+    
+    import { NzCarouselComponent } from 'ng-zorro-antd';
+    import { ActivatedRoute } from '@angular/router';  // here
+    import { map } from 'rxjs/internal/operators';
+    
+    @Component({
+      selector: 'app-home',
+      templateUrl: './home.component.html',
+      styleUrls: ['./home.component.less']
+    })
+    export class HomeComponent implements OnInit {
+      carouselActiveIndex = 0;
+      banners: Banner[];
+      hotTags: HotTag[];
+      songSheetList: SongSheet[];
+      singers: Singer[];
+    
+    
+      @ViewChild(NzCarouselComponent, {static:true}) private nzCarousel: NzCarouselComponent;
+    
+      constructor(
+        private route: ActivatedRoute // 注册
+      ) {
+          // here  this.route.data 
+          this.route.data.pipe(map (res => res.homeDatas)).subscribe(([banners, tags, sheets, singers]) => { // 结构复制
+            this.banners = banners;
+            this.hotTags = tags;
+            this.songSheetList = sheets;
+            this.singers = singers;
+          })
+       }
+    
+      
+      ngOnInit() {
+      }
+    
+      onBeforeChange( {to} ) {
+        this.carouselActiveIndex = to;
+      }
+    
+      onChangeSlide(type: 'pre' | 'next') {
+        this.nzCarousel[type]();
+      }
+    
+    }
+    
+    ```
+
+    
