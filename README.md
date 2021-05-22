@@ -276,4 +276,35 @@ changeDetection: ChangeDetectionStrategy.OnPush 变更检测
     
     ```
 
-    
+    在angualr取数据 在resolve是最好的
+
+
+
+### 底部音乐播放器模块
+
+`ng g m share/wy-ui/wy-player`
+
+然后生成一个组件
+`ng g c share/wy-ui/wy-player`
+
+引入组件的展示到页面需要流程 [不要烦恼 脑子清晰头脑清晰]
+
+1. wy-player.module.ts 需要exports 组件
+2. wy-ui.module.ts 引入 WyPlayerModule 和exports出来
+3. share.module.ts 需要引入和exports --WyUimodule
+
+
+
+
+
+### 处理歌单数据
+
+- sheet.service.ts
+- song.service.ts
+- 这一版块有点复杂，需要理清p14-p15 **
+- 用到rxjs操作符遍历，遍历数据 ，可以学习别人遍历
+
+
+
+
+

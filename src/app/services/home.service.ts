@@ -32,6 +32,6 @@ export class HomeService {
 
   getPersonalSheetList(): Observable<SongSheet[]> {
     return this.http.get(this.uri + 'personalized')
-      .pipe(map( (res: { result: SongSheet[]}) => res.result))
+      .pipe(map( (res: { result: SongSheet[]}) => res.result.slice(0, 16)));
   }
 }

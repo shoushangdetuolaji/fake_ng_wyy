@@ -4,6 +4,7 @@ import { Banner, HotTag, Singer, SongSheet } from 'src/app/services/data-type/co
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/internal/operators';
+import { SheetService } from 'src/app/services/sheet.service'
 
 @Component({
   selector: 'app-home',
@@ -21,9 +22,10 @@ export class HomeComponent implements OnInit {
   @ViewChild(NzCarouselComponent, {static:true}) private nzCarousel: NzCarouselComponent;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private sheetServe: SheetService
   ) {
-      this.route.data.pipe(map (res => res.homeDatas)).subscribe(([banners, tags, sheets, singers]) => { // 结构复制
+      this.route.data.pipe(map (res => res.homeDatas)).subscribe(([banners, tags, sheets, singers]) => { // 结构赋值
         this.banners = banners;
         this.hotTags = tags;
         this.songSheetList = sheets;
@@ -43,4 +45,10 @@ export class HomeComponent implements OnInit {
     this.nzCarousel[type]();
   }
 
+  onPlaySheet(id: number) {
+    console.log('id :', id);
+    this.sheetServe.playSheet(id).subscribe(res => {
+      console.log('res :', res);
+    });
+  }
 }
