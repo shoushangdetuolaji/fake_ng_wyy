@@ -391,3 +391,52 @@ export class WySliderTrackComponent implements OnInit {
 
 
 
+选择当前组件的ref 
+
+可以引入 #id 名字
+
+```ts
+import { Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
+
+@Component({
+  selector: 'app-wy-slider',
+  templateUrl: './wy-slider.component.html',
+  styleUrls: ['./wy-slider.component.less'],
+  encapsulation: ViewEncapsulation.None
+})
+export class WySliderComponent implements OnInit {
+
+  constructor(
+    private el: ElementRef  // *here el ： ElementRef 元素
+  ) { }
+
+  ngOnInit() {
+    console.log('el:', this.el.nativeElement);
+  }
+
+}
+
+```
+
+
+
+
+
+#### wy-slider组件滑动事件 pc+mobile
+
+```
+PC: mousedown mousemove mouseup
+	MouseEvent
+	
+	event.pageX || event.pageY
+
+phone： touchstart touchmove touchend
+	TouchEvent
+	
+	event.touchs[0].pageX || event.touchs[0].pageY
+```
+
+#### 定义一个元素变量
+
+`private sliderDom: HTMLDivElement;`
+
