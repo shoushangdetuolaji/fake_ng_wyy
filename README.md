@@ -3,6 +3,7 @@
 - angular-cli@8.3.0
 - ng-zorro-antd@8.1.2
 - [api](https://github.com/Binaryify/NeteaseCloudMusicApi)
+- [ng2020+](https://live.ngplus.world/index)
 
 
 
@@ -303,6 +304,84 @@ changeDetection: ChangeDetectionStrategy.OnPush 变更检测
 - song.service.ts
 - 这一版块有点复杂，需要理清p14-p15 **
 - 用到rxjs操作符遍历，遍历数据 ，可以学习别人遍历
+
+
+
+### 滑块组件模块
+
+`ng g m share/wy-ui/my-slider`
+
+- wy-player-module.ts引入 WysliderModule
+- wy-slider.module.ts 也要exports  WySliderComponent
+
+`ng g c share/wy-ui/wy-slider`
+
+`ng g c share/wy-ui/wy-slider-track`
+
+`ng g c share/wy-ui/wy-slider-handle`
+
+
+
+注意是 视图封装模式
+
+> https://v8.angular.cn/guide/component-styles#view-encapsulation
+
+wy-slider.component.ts 
+
+```ts
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
+@Component({
+  selector: 'app-wy-slider',
+  templateUrl: './wy-slider.component.html',
+  styleUrls: ['./wy-slider.component.less'],
+  encapsulation: ViewEncapsulation.None  // **这里决定了 wy-slider-track wy-slider-handle 的样式
+})
+export class WySliderComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+```
+
+wy-slider-track.component.ts
+
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-wy-slider-handle',
+  template: `<div class="wy-slider-handle"></div>`
+})
+export class WySliderHandleComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+}
+```
+
+wy-slider-handle.component.ts
+
+```ts
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-wy-slider-track',
+  template: `<div class="wy-slider-track"></div>`
+})
+export class WySliderTrackComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+}
+```
 
 
 
