@@ -326,6 +326,10 @@ changeDetection: ChangeDetectionStrategy.OnPush 变更检测
 
 > https://v8.angular.cn/guide/component-styles#view-encapsulation
 
+encapsulation： 
+
+`None` 意味着 Angular 不使用视图封装。 Angular 会把 CSS 添加到全局样式中。而不会应用上前面讨论过的那些作用域规则、隔离和保护等。 从本质上来说，这跟把组件的样式直接放进 HTML 是一样的。(译注：能进能出。)
+
 wy-slider.component.ts 
 
 ```ts
