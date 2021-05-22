@@ -440,3 +440,5 @@ phone： touchstart touchmove touchend
 
 `private sliderDom: HTMLDivElement;`
 
+该内容大量的rxjs操作符---果然邪教--- 学到设计模式 P18
+
