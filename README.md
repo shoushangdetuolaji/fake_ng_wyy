@@ -458,3 +458,30 @@ tslin.json 配置
 "no-non-null-assertion": false
 ```
 
+
+
+
+
+### ngrx
+
+reactive state for angular 
+
+angular状态管理器 相当于vue的vuex react的redux。。。
+
+> https://next.ngrx.io/ 
+>
+> 竟然有中文版本了
+
+创建一个模块
+
+`ng g m store`
+
+不知道怎么用文字描述 只能看阅读代码了
+
+安装
+
+`ng add @ngrx/store`
+
+安装调试工具
+
+`ng add @ngrx/store-devtools`
