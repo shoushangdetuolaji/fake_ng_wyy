@@ -434,6 +434,14 @@ phone： touchstart touchmove touchend
 	TouchEvent
 	
 	event.touchs[0].pageX || event.touchs[0].pageY
+	
+position => val
+
+position / 滑块组件总长 === (val - min) / (max - min)
+
+ratio === (val - min) / (max- min)
+
+ratio * (max - min) + min === val
 ```
 
 #### 定义一个元素变量
@@ -441,4 +449,12 @@ phone： touchstart touchmove touchend
 `private sliderDom: HTMLDivElement;`
 
 该内容大量的rxjs操作符---果然邪教--- 学到设计模式 P18
+
+#### 脚手架兼容ie9
+
+tslin.json 配置 
+
+```
+"no-non-null-assertion": false
+```
 
