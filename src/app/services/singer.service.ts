@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ServicesModule, API_CONFIG } from './services.module';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Singer } from './data-type/common.type';
+import { Singer } from './data-types/common.types';
 import { map } from 'rxjs/internal/operators';
 import queryString from 'query-string';
 

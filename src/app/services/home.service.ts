@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ServicesModule, API_CONFIG } from './services.module';
 import { HttpClient } from '@angular/common/http';
-import { Banner, HotTag, SongSheet } from './data-type/common.type';
+import { Banner, HotTag, SongSheet } from './data-types/common.types';
 import { map } from 'rxjs/internal/operators';
 
 @Injectable({

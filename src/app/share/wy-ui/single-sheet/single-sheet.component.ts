@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { SongSheet } from 'src/app/services/data-type/common.type';
+import { SongSheet } from 'src/app/services/data-types/common.types';
 
 @Component({
   selector: 'app-single-sheet',

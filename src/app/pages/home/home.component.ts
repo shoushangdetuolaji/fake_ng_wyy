@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Banner, HotTag, Singer, SongSheet } from 'src/app/services/data-type/common.type';
+import { Banner, HotTag, Singer, SongSheet } from 'src/app/services/data-types/common.types';
 
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';

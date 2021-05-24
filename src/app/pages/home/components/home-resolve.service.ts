@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Resolve } from "@angular/router";
 import { forkJoin, Observable } from "rxjs";
 import { first, take } from "rxjs/internal/operators";
-import { Banner, HotTag, Singer, SongSheet } from "src/app/services/data-type/common.type";
+import { Banner, HotTag, Singer, SongSheet } from "src/app/services/data-types/common.types";
 import { HomeService } from "src/app/services/home.service";
 import { SingerService } from "src/app/services/singer.service";
  

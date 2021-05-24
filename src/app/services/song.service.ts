@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { observable, Observable } from 'rxjs';
 import { ServicesModule, API_CONFIG } from './services.module';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Song, SongSheet, SongUrl } from './data-type/common.type';
+import { Song, SongSheet, SongUrl } from './data-types/common.types';
 import { map } from 'rxjs/internal/operators';
 
 @Injectable({
