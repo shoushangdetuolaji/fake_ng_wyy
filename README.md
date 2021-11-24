@@ -674,11 +674,28 @@ export class PagesModule { }
 
 > 创建一个服务模块，比如请求，数据交互的
 
-最后被core模块引入，也是用于集成各种服务模块
-
-里面可以有不同页面对应的服务模块
+最后被core模块引入，也可以被各种服务模块引用，一般做令牌和请求url设置
 
 `ng g m services`
+
+```ts
+import { NgModule } from '@angular/core';
+// 做一个令牌
+export const API_CONFIG = new InjectionToken('ApiConfigToken');
+
+@NgModule({
+  declarations: [],
+  imports: [
+
+  ],
+  providers: [
+    { provide: API_CONFIG, useValue: 'http://localhost:3000/' }
+  ]
+})
+export class ServicesModule { }
+```
+
+
 
 
 
