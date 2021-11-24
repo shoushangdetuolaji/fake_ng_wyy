@@ -501,3 +501,192 @@ angular状态管理器 相当于vue的vuex react的redux。。。
 安装调试工具
 
 `ng add @ngrx/store-devtools`
+
+
+
+
+
+### 项目开发配置
+
+> https://github.com/lycHub/ng-wyy/blob/2-1/package.json
+
+
+
+### 安装脚手架
+
+`npm i @angular/cli -g`
+
+查看版本号`ng --version`
+
+```json
+"dependencies": {
+    "@angular/animations": "~8.2.3",
+    "@angular/common": "~8.2.3",
+    "@angular/compiler": "~8.2.3",
+    "@angular/core": "~8.2.3",
+    "@angular/forms": "~8.2.3",
+    "@angular/platform-browser": "~8.2.3",
+    "@angular/platform-browser-dynamic": "~8.2.3",
+    "@angular/router": "~8.2.3",
+    "@ngrx/store": "^8.6.1",
+    "@ngrx/store-devtools": "^8.6.1",
+    "minireset.css": "0.0.5",
+    "ng-zorro-antd": "^8.1.2",
+    "rxjs": "~6.4.0",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.9.1"
+  }
+```
+
+
+
+### 创建项目
+
+`ng new ng-wyy --style=less --routing -S`
+
+- 指定less样式
+- --routing -S  不写单元测试
+
+### 安装NG-ZORRO库
+
+`ng add ng-zorro-antd@`8.1.2
+
+为了减少麻烦，安装此版本依赖库
+
+- add icon assets --- yes
+- set up custom theme file --- yes
+- choose template to create project --- blank
+
+### angular.json有定义css引入文件路径
+
+需要注意一下这个
+
+### 创建一个core模块
+
+> 用于分担`app.module.ts下的imports模块引入`
+
+`ng g m core`
+
+自然app.module.ts引入CoreModule就好了
+
+
+
+===core.module.ts==
+
+```ts
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from '../app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+@NgModule({
+    declarations:[],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        ServicesModule,
+        PagesModule,
+        ShareModule,
+        AppRoutingModule
+    ],
+    exports: [
+        ShareModule,
+        AppRoutingModule
+    ],
+    providers:[]
+})
+export class CoreModule { }
+
+```
+
+
+
+### 创建share.module.ts
+
+> 用途存放全局公共的组件和指令
+>
+> 当然需要被core.module.ts imports和exports
+
+`ng add m share`
+
+===share.module.ts===
+
+```ts
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+    declarations:[],
+    imports: [
+        CommonModule,
+        NgZorroAntdModule,
+        FormsModule
+    ],
+    exports: [
+        CommonModule,
+        NgZorroAntdModule,
+        FormsModule
+    ],
+    providers:[]
+})
+export class ShareModule { }
+```
+
+
+
+### 创建pages.module.ts
+
+> 管理所有页面的模块
+
+当然需要被core模块引入
+
+`ng g m pages`
+
+===pages.module.ts===
+
+```ts
+import { NgModule } from '@angular/core';
+import { HomeModule } from './home/home.module';
+
+@NgModule({
+  declarations: [],
+  imports: [
+    HomeModule
+  ],
+  exports: [
+    HomeModule
+  ]
+})
+export class PagesModule { }
+```
+
+比如这里再创建一个home模块
+
+`ng g m pages/home`
+
+
+
+### 创建services.module.ts
+
+> 创建一个服务模块，比如请求，数据交互的
+
+最后被core模块引入，也是用于集成各种服务模块
+
+里面可以有不同页面对应的服务模块
+
+`ng g m services`
+
+
+
+
+
+
+
+
+
+
+
