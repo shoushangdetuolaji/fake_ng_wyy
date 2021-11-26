@@ -697,6 +697,21 @@ export class ServicesModule { }
 
 
 
+### 设置core模块只能被app模块引入
+
+> 装饰器 @SkipSelf @Optional
+
+```ts
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+export class CoreModule {
+  constructor(@SkipSelf() @Optional() parentModule: CoreModule) {
+    if(parentModule) {
+      throw new Error('CoreModule 只能被appModule引入');
+    }
+  }
+}
+```
+
 
 
 

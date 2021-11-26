@@ -1,4 +1,4 @@
-export type Banner = {
+export interface Banner {
   targetId: number;
   url: string;
   imageUrl: string;
