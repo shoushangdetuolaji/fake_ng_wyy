@@ -1,4 +1,4 @@
-export interface Banner {
+export type Banner = {
   targetId: number;
   url: string;
   imageUrl: string;
@@ -39,5 +39,5 @@ export type SongSheet = {
   name: string;
   picUrl: string;
   playCount: number;
-  tracks: Song[]
+  tracks: Song[];
 }

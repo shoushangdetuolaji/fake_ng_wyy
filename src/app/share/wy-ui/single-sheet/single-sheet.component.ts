@@ -15,7 +15,7 @@ export class SingleSheetComponent implements OnInit {
   }
 
   playSheet(id: number) {
-    this.onPlay.emit(id)
+    this.onPlay.emit(id);
   }
 
 }

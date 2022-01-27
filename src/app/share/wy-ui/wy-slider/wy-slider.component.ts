@@ -74,12 +74,12 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
       const { start, move, end, filter: filerFunc, pluckKey } = source;
 
       source.startPlucked$ = fromEvent(this.sliderDom, start)
-      .pipe(
-        filter(filerFunc),
-        tap(sliderEvent),
-        pluck(...pluckKey),
-        map((position: number) => this.findClosestValue(position))
-      );
+        .pipe(
+          filter(filerFunc),
+          tap(sliderEvent),
+          pluck(...pluckKey),
+          map((position: number) => this.findClosestValue(position))
+        );
 
       source.end$ = fromEvent(this.doc, end);
       source.moveResolved$ = fromEvent(this.doc, move).pipe(
@@ -153,7 +153,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
       this.updateTrackAndHandles();
       this.onValueChange(this.value);
     }
-    
+
   }
 
 
@@ -161,7 +161,7 @@ export class WySliderComponent implements OnInit, OnDestroy, ControlValueAccesso
     let res = value;
     if (this.assertValueValid(value)) {
       res = this.wyMin;
-    }else {
+    } else {
       res = limitNumberInRange(value, this.wyMin, this.wyMax);
     }
     return res;

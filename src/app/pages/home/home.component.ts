@@ -4,10 +4,12 @@ import { Banner, HotTag, Singer, SongSheet } from 'src/app/services/data-types/c
 import { NzCarouselComponent } from 'ng-zorro-antd';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/internal/operators';
-import { SheetService } from 'src/app/services/sheet.service'
+import { SheetService } from 'src/app/services/sheet.service';
 import { Store } from '@ngrx/store';
 import { AppStoreModule } from 'src/app/store';
 import { SetCurrentIndex, SetPlayList, SetSongList } from 'src/app/store/actions/player.actions';
+import {HomeService} from '../../services/home.service';
+import {SingerService} from '../../services/singer.service';
 
 @Component({
   selector: 'app-home',
@@ -22,11 +24,13 @@ export class HomeComponent implements OnInit {
   singers: Singer[];
 
 
-  @ViewChild(NzCarouselComponent, {static:true}) private nzCarousel: NzCarouselComponent;
+  @ViewChild(NzCarouselComponent, {static: true}) private nzCarousel: NzCarouselComponent;
 
   constructor(
     private route: ActivatedRoute,
     private sheetServe: SheetService,
+    private singerServe: SingerService,
+    private homeServe: HomeService,
     private store$: Store<AppStoreModule>
   ) {
       this.route.data.pipe(map (res => res.homeDatas)).subscribe(([banners, tags, sheets, singers]) => { // 结构赋值
@@ -34,11 +38,11 @@ export class HomeComponent implements OnInit {
         this.hotTags = tags;
         this.songSheetList = sheets;
         this.singers = singers;
-      })
+      });
    }
 
-  
   ngOnInit() {
+
   }
 
   onBeforeChange( {to} ) {
@@ -46,11 +50,12 @@ export class HomeComponent implements OnInit {
   }
 
   onChangeSlide(type: 'pre' | 'next') {
+    // ng-zotto文档 轮播图实例的方法
+    // console.log(this.nzCarousel);
     this.nzCarousel[type]();
   }
 
   onPlaySheet(id: number) {
-    console.log('id :', id);
     this.sheetServe.playSheet(id).subscribe(list => {
       console.log('res :', list);
       this.store$.dispatch(SetSongList({ songList: list }));

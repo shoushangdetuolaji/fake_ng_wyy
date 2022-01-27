@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeResolverService } from './components/home-resolve.service';
+import { HomeResolverService } from './home-resolve.service';
 import { HomeComponent } from './home.component';
 
 
