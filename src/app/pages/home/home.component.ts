@@ -29,8 +29,6 @@ export class HomeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private sheetServe: SheetService,
-    private singerServe: SingerService,
-    private homeServe: HomeService,
     private store$: Store<AppStoreModule>
   ) {
       this.route.data.pipe(map (res => res.homeDatas)).subscribe(([banners, tags, sheets, singers]) => { // 结构赋值
